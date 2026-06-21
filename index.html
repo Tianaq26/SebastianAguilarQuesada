@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sebastián Aguilar — Game Developer & Software Engineer</title>
+  <meta name="description" content="Portfolio of Sebastián Aguilar — Game developer, software engineer, and builder from Costa Rica. Gold medalist at Infomatrix." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --bg-card: #111118; --bg-card-hover: #16161f;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(255,255,255,0.14);
+      --text: #f0f0f5; --text-muted: #8888a0; --text-dim: #55556a;
+      --gold: #d4a017; --gold-light: #f0c040;
+      --gold-bg: rgba(212,160,23,0.08); --gold-border: rgba(212,160,23,0.25);
+      --accent: #6c63ff; --accent-light: #8b84ff;
+      --accent-bg: rgba(108,99,255,0.08); --accent-border: rgba(108,99,255,0.25);
+      --radius: 12px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-weight: 600; font-size: 0.95rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent-light); }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--accent); color: white !important; padding: 0.5rem 1.1rem; border-radius: var(--radius-sm); font-weight: 500 !important; transition: background 0.2s, transform 0.1s !important; }
+    .nav-cta:hover { background: var(--accent-light) !important; color: white !important; transform: translateY(-1px); }
+
+    /* LANG TOGGLE */
+    .lang-btn { display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-hover); color: var(--text-muted); font-size: 0.78rem; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 100px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em; white-space: nowrap; }
+    .lang-btn:hover { background: rgba(255,255,255,0.09); color: var(--text); border-color: var(--text-dim); }
+    .lang-flag { font-size: 1rem; }
+
+    /* LAYOUT */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; position: relative; overflow: hidden; }
+    .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%); }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%); top: 10%; left: 50%; transform: translateX(-50%); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold-light); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.4rem 0.9rem; border-radius: 100px; margin-bottom: 1.8rem; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; color: var(--text); margin-bottom: 1.2rem; }
+    h1 .accent { color: var(--accent-light); }
+    h1 .dim { color: var(--text-muted); }
+    .hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 540px; line-height: 1.65; margin-bottom: 2.2rem; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border-hover); padding: 0.75rem 1.5rem; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.15s; }
+    .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); transform: translateY(-2px); }
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat-item .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--text); letter-spacing: -0.03em; display: block; }
+    .stat-item .stat-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* SECTION TITLES */
+    .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.75rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text); line-height: 1.15; margin-bottom: 1rem; }
+    .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 540px; line-height: 1.65; }
+
+    /* ACHIEVEMENT TIMELINE */
+    #achievement { background: linear-gradient(135deg, rgba(212,160,23,0.04) 0%, transparent 50%); }
+    .achievement-intro { margin-bottom: 2.5rem; }
+    .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 22px; top: 28px; bottom: 28px; width: 1px; background: linear-gradient(to bottom, var(--gold-border), var(--accent-border), transparent); }
+    .timeline-item { display: grid; grid-template-columns: 48px 1fr; gap: 1.25rem; align-items: start; padding-bottom: 1.75rem; position: relative; }
+    .timeline-dot { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; position: relative; z-index: 1; }
+    .timeline-dot.gold { background: var(--gold-bg); border: 2px solid var(--gold-border); }
+    .timeline-dot.gold2 { background: var(--gold-bg); border: 2px solid var(--gold-border); }
+    .timeline-dot.future { background: var(--accent-bg); border: 2px solid var(--accent-border); }
+    .timeline-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.6rem; position: relative; overflow: hidden; }
+    .timeline-card.highlight { border-color: var(--gold-border); }
+    .timeline-card.highlight::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .timeline-card.future-card { border-color: var(--accent-border); }
+    .timeline-card.future-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+    .tl-year { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .tl-year.accent-year { color: var(--accent-light); }
+    .tl-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .tl-sub { font-size: 0.85rem; color: var(--gold-light); font-weight: 500; margin-bottom: 0.6rem; }
+    .tl-sub.accent-sub { color: var(--accent-light); }
+    .tl-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+    .medal-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold-light); font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 100px; margin-top: 0.6rem; }
+    .future-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent-light); font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 100px; margin-top: 0.6rem; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.75; margin-bottom: 1.2rem; }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+    .about-pillars { display: flex; flex-direction: column; gap: 1rem; }
+    .pillar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.2rem 1.4rem; transition: border-color 0.2s; }
+    .pillar-card:hover { border-color: var(--border-hover); }
+    .pillar-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .pillar-name { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+    .pillar-desc { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* FLAGSHIP */
+    #flagship { background: var(--bg-card); }
+    .flagship-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .flagship-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent-light); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1rem; }
+    .flagship-title { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text); margin-bottom: 0.3rem; }
+    .flagship-alt { font-size: 0.85rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-bottom: 1.2rem; }
+    .flagship-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .flagship-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; padding: 0.25rem 0.65rem; border-radius: 100px; }
+    .flagship-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: gap 0.2s; }
+    .flagship-link:hover { gap: 0.7rem; }
+    .systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .system-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.1rem; transition: border-color 0.2s, background 0.2s; }
+    .system-card:hover { border-color: var(--accent-border); background: var(--accent-bg); }
+    .system-name { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+    .system-tech { font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; display: flex; flex-direction: column; gap: 0.75rem; text-decoration: none; transition: border-color 0.2s, transform 0.2s, background 0.2s; }
+    .project-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateY(-3px); }
+    .project-header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+    .project-icon { width: 42px; height: 42px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .project-icon.purple { background: rgba(108,99,255,0.12); }
+    .project-icon.teal { background: rgba(62,207,142,0.12); }
+    .project-icon.amber { background: rgba(212,160,23,0.12); }
+    .project-arrow { color: var(--text-dim); font-size: 1rem; transition: transform 0.2s, color 0.2s; }
+    .project-card:hover .project-arrow { transform: translate(2px, -2px); color: var(--text-muted); }
+    .project-category { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .project-name { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .project-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .skill-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; }
+    .skill-group-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .skill-group-icon { font-size: 1.1rem; }
+    .skill-group-name { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .skill-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--text-muted); }
+    .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* GOALS */
+    .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .goal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; transition: border-color 0.2s; }
+    .goal-card:hover { border-color: var(--accent-border); }
+    .goal-num { font-size: 2rem; font-weight: 700; color: var(--border-hover); font-family: 'JetBrains Mono', monospace; letter-spacing: -0.04em; margin-bottom: 0.6rem; line-height: 1; }
+    .goal-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .goal-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* CONTACT */
+    #contact { background: var(--bg-card); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 1.2rem; text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: border-color 0.2s, color 0.2s; }
+    .contact-link:hover { border-color: var(--border-hover); color: var(--text); }
+    .contact-link-icon { width: 32px; height: 32px; background: var(--accent-bg); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-link-label { font-weight: 500; font-size: 0.82rem; color: var(--text-dim); display: block; }
+    .contact-link-val { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+    .contact-form-note { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 0.5rem; }
+    .contact-form-note strong { color: var(--text); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; }
+    .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-muted); }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 0; }
+      .container { padding: 0 1.25rem; }
+      .about-grid, .flagship-inner, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .systems-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2.2rem; }
+      .hero-stats { gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .timeline::before { left: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Sebastian<span>.</span> Aguilar<span>.</span> Quesada<span>.</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#achievement" data-i18n="nav_achievement">Journey</a></li>
+      <li><a href="#flagship" data-i18n="nav_eteria">Eteria</a></li>
+      <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <button class="lang-btn" id="langToggle" onclick="toggleLang()">
+      <span class="lang-flag" id="langFlag">🇪🇸</span>
+      <span id="langLabel">ES</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge" data-i18n="hero_badge">🥇 Gold Medal — Infomatrix Iberoamérica 2026</div>
+      <h1 data-i18n="hero_h1">
+        Building games,<br/>
+        software <span class="dim">&</span> ideas<br/>
+        <span class="accent">from scratch.</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        I'm Sebastián Aguilar — a self-taught developer from Costa Rica. I build open-world RPGs, full-stack applications, and robotic systems. 18 years old, already competing internationally.
+      </p>
+      <div class="hero-ctas">
+        <a href="#flagship" class="btn-primary" data-i18n="hero_cta1">See my main project →</a>
+        <a href="#contact" class="btn-secondary" data-i18n="hero_cta2">Get in touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">2+</span>
+          <span class="stat-label" data-i18n="stat1">Years building Eteria</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">🥇🥇</span>
+          <span class="stat-label" data-i18n="stat2">National + Iberoamérica Gold</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">2027</span>
+          <span class="stat-label" data-i18n="stat3">World Finals — Bucharest</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-label" data-i18n="stat4">Languages & frameworks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENT TIMELINE -->
+<section id="achievement">
+  <div class="container">
+    <div class="achievement-intro fade-up">
+      <div class="section-label" data-i18n="ach_label">Recognition</div>
+      <div class="section-title" data-i18n="ach_title">An international journey</div>
+      <p class="section-desc" data-i18n="ach_desc">Three stages. One project. From a national competition in Costa Rica to the Iberoamerican final — and now qualified for the world stage.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot gold">🏅</div>
+        <div class="timeline-card highlight">
+          <div class="tl-year" data-i18n="tl1_year">Infomatrix Costa Rica · 2025</div>
+          <div class="tl-title" data-i18n="tl1_title">Gold Medal — National Competition</div>
+          <div class="tl-sub" data-i18n="tl1_sub">Software Development category · Costa Rica</div>
+          <p class="tl-desc" data-i18n="tl1_desc">I competed in the national edition of Infomatrix, the largest student technology competition in the country, presenting Eteria as my project. I won Gold in the Software Development category — earning the right to represent Costa Rica at the Iberoamerican stage.</p>
+          <div class="medal-pill">🥇 <span data-i18n="tl1_pill">Gold Medal — Qualified for Iberoamérica</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot gold2">🌎</div>
+        <div class="timeline-card highlight">
+          <div class="tl-year" data-i18n="tl2_year">Infomatrix Iberoamérica · June 2026 · San Luis Potosí, Mexico</div>
+          <div class="tl-title" data-i18n="tl2_title">Gold Medal — Iberoamerican Final</div>
+          <div class="tl-sub" data-i18n="tl2_sub">Software Development · Representing Costa Rica</div>
+          <p class="tl-desc" data-i18n="tl2_desc">Competing against teams from across Latin America, Spain, and Portugal — the best student developers in the Iberoamerican region. I presented Eteria before an international jury and won Gold again in Software Development, earning direct accreditation to the World Finals.</p>
+          <div class="medal-pill">🥇 <span data-i18n="tl2_pill">Gold Medal — Qualified for World Finals</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot future">🌍</div>
+        <div class="timeline-card future-card">
+          <div class="tl-year accent-year" data-i18n="tl3_year">Infomatrix World Finals · 2027 · Bucharest, Romania</div>
+          <div class="tl-title" data-i18n="tl3_title">World Finals — Coming Next</div>
+          <div class="tl-sub accent-sub" data-i18n="tl3_sub">Qualified · Representing Costa Rica</div>
+          <p class="tl-desc" data-i18n="tl3_desc">The next chapter. I'll be competing at the Infomatrix World Finals in Bucharest against the best student teams from over 30 countries. The same project, the same drive — on the biggest stage yet.</p>
+          <div class="future-pill">🎯 <span data-i18n="tl3_pill">Qualified · 2027</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <div class="section-label" data-i18n="about_label">About me</div>
+        <div class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;" data-i18n="about_title">Builder by instinct, developer by choice.</div>
+        <p data-i18n="about_p1">I'm an 18-year-old developer from Costa Rica with a passion for building <strong>complex, ambitious projects</strong> from the ground up. I've been coding, designing, and iterating since before I had any formal training in it.</p>
+        <p data-i18n="about_p2">My main focus is <strong>game development and software engineering</strong>, but I also work with 3D modeling, shaders, VFX, robotics, and hardware. I'm the kind of person who, when faced with a problem I don't know how to solve, just goes and learns how to solve it.</p>
+        <p data-i18n="about_p3">I've spent the last two years building Eteria — an open-world RPG with AI-driven NPCs, custom shaders, a full combat system, and a handcrafted 3D world. Not for a school project. Because I want it to exist.</p>
+        <p data-i18n="about_p4">Next step: university abroad. I'm looking for environments where ambitious builders can grow fast, work on hard problems, and make real things.</p>
+      </div>
+      <div class="about-pillars fade-up">
+        <div class="pillar-card">
+          <div class="pillar-icon">🎮</div>
+          <div class="pillar-name" data-i18n="pillar1_name">Game Development</div>
+          <div class="pillar-desc" data-i18n="pillar1_desc">Unity, C#, gameplay systems, AI, combat, shaders, VFX, optimization</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">💻</div>
+          <div class="pillar-name" data-i18n="pillar2_name">Software Engineering</div>
+          <div class="pillar-desc" data-i18n="pillar2_desc">Full-stack development with React, TypeScript, ASP.NET, and MySQL</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🎨</div>
+          <div class="pillar-name" data-i18n="pillar3_name">3D & Technical Art</div>
+          <div class="pillar-desc" data-i18n="pillar3_desc">Blender modeling, UV unwrapping, rigging, shader graphs, Krita textures</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🤖</div>
+          <div class="pillar-name" data-i18n="pillar4_name">Robotics & Hardware</div>
+          <div class="pillar-desc" data-i18n="pillar4_desc">ESP32, servo motors, ultrasonic sensors, C++, control logic</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🖨️</div>
+          <div class="pillar-name" data-i18n="pillar5_name">3D Printing & Prototyping</div>
+          <div class="pillar-desc" data-i18n="pillar5_desc">Physical prototyping, TPU materials, functional geometry, custom manufacturing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLAGSHIP -->
+<section id="flagship">
+  <div class="container">
+    <div class="flagship-inner">
+      <div class="fade-up">
+        <div class="flagship-badge" data-i18n="flag_badge">⭐ Flagship project</div>
+        <div class="flagship-title">Eteria</div>
+        <div class="flagship-alt">// also known as Dragones de Valkar</div>
+        <p class="flagship-desc" data-i18n="flag_desc1">An open-world RPG developed solo in Unity over two-plus years. Eteria features five islands with distinct biomes, a full dragon system with capture, taming, and rideable flight, turn-based elemental combat, AI-driven NPCs, handcrafted 3D assets, and a complete UI system — all running stably on low-end hardware.</p>
+        <p class="flagship-desc" data-i18n="flag_desc2">This project is the clearest demonstration of what I can do: sustain a large, multi-system codebase over time, learn new technologies as needed, and deliver something polished. The same project that won Gold at both national and Iberoamerican Infomatrix.</p>
+        <div class="flagship-tags">
+          <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Blender</span>
+          <span class="tag">Shader Graph</span><span class="tag">NavMesh</span><span class="tag">Cinemachine</span>
+          <span class="tag">Timeline</span><span class="tag">VFX Graph</span><span class="tag">JSON</span>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://tianaq26.github.io/Eteria/" target="_blank" class="flagship-link" data-i18n="flag_link1">View project site →</a>
+          <a href="https://github.com/Tianaq26/eteria-world" target="_blank" class="flagship-link" style="color: var(--text-muted);">GitHub →</a>
+        </div>
+      </div>
+      <div class="systems-grid fade-up">
+        <div class="system-card"><div class="system-name" data-i18n="sys1_name">Dragon System</div><div class="system-tech">capture · taming · flight · 100+ bone rig</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys2_name">Combat Engine</div><div class="system-tech">turn-based · elemental types · combos</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys3_name">NPC AI</div><div class="system-tech">NavMesh · state machines · patrol logic</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys4_name">Custom Shaders</div><div class="system-tech">water · grass · emission · distortion</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys5_name">VFX Systems</div><div class="system-tech">rain · fire · dragon attacks · particles</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys6_name">Dynamic UI</div><div class="system-tech">inventory · shop · cooking · HUD</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys7_name">Optimization</div><div class="system-tech">LOD · occlusion culling · GPU instancing</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys8_name">Cinematics</div><div class="system-tech">Timeline · Cinemachine · scripted sequences</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys9_name">Open World</div><div class="system-tech">5 islands · 20+ grid cells · multiple biomes</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="sys10_name">Data Systems</div><div class="system-tech">JSON databases · class inheritance · IDs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label" data-i18n="proj_label">Projects</div>
+    <div class="section-title" data-i18n="proj_title">What else I've built</div>
+    <p class="section-desc" data-i18n="proj_desc">Beyond Eteria, I've shipped a full-stack web app, built a competitive sumobot, and launched a 3D printing business.</p>
+    <div class="projects-grid">
+      <a href="https://figutrades.vercel.app/" target="_blank" class="project-card">
+        <div class="project-header"><div class="project-icon teal">🛒</div><span class="project-arrow">↗</span></div>
+        <div class="project-category" data-i18n="proj1_cat">Software Engineering · Full-stack</div>
+        <div class="project-name">FiguTrades</div>
+        <p class="project-desc" data-i18n="proj1_desc">A full-stack marketplace for trading collectibles. Built end-to-end: React + TypeScript frontend, C# ASP.NET backend, and MySQL database. Product-quality architecture, real deployment.</p>
+        <div class="project-tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">ASP.NET</span><span class="tag">MySQL</span></div>
+      </a>
+      <a href="https://tianaq26.github.io/Mundos_3D/" target="_blank" class="project-card">
+        <div class="project-header"><div class="project-icon amber">🖨️</div><span class="project-arrow">↗</span></div>
+        <div class="project-category" data-i18n="proj2_cat">Entrepreneurship · 3D Printing</div>
+        <div class="project-name">Mundos 3D</div>
+        <p class="project-desc" data-i18n="proj2_desc">A personal 3D printing business where I handle design, manufacturing, and sales. Includes experimentation with TPU materials, functional geometry, and physical prototyping pipelines.</p>
+        <div class="project-tags"><span class="tag">3D Printing</span><span class="tag">Blender</span><span class="tag">TPU</span><span class="tag">Prototyping</span></div>
+      </a>
+      <div class="project-card" style="cursor: default;">
+        <div class="project-header"><div class="project-icon purple">🤖</div></div>
+        <div class="project-category" data-i18n="proj3_cat">Robotics · Hardware</div>
+        <div class="project-name" data-i18n="proj3_name">SumoBot — 3rd Place, CENFOTEC</div>
+        <p class="project-desc" data-i18n="proj3_desc">A competitive sumobot built for the CENFOTEC robotics competition in Grecia. Programmed in C++ on an ESP32 with ultrasonic distance sensing and servo-controlled actuation. Placed 3rd nationally.</p>
+        <div class="project-tags"><span class="tag">ESP32</span><span class="tag">C++</span><span class="tag">Servo motors</span><span class="tag">Ultrasonic</span></div>
+      </div>
+      <div class="project-card" style="cursor: default;">
+        <div class="project-header"><div class="project-icon purple">🏫</div></div>
+        <div class="project-category" data-i18n="proj4_cat">Community · Education</div>
+        <div class="project-name" data-i18n="proj4_name">Programming Club — CTP Mario Quirós</div>
+        <p class="project-desc" data-i18n="proj4_desc">After winning at Infomatrix, I founded a school programming club to share what I had learned. Over 15 students are now building their own projects in software, games, and hardware.</p>
+        <div class="project-tags"><span class="tag">Unity</span><span class="tag">Python</span><span class="tag">C#</span><span class="tag">Mentoring</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label" data-i18n="skills_label">Tech Stack</div>
+    <div class="section-title" data-i18n="skills_title">Skills & tools</div>
+    <div class="skills-grid">
+      <div class="skill-group fade-up">
+        <div class="skill-group-header"><span class="skill-group-icon">💻</span><span class="skill-group-name" data-i18n="sg1">Languages</span></div>
+        <ul class="skill-list">
+          <li class="skill-item"><span class="skill-dot"></span> C# (advanced)</li>
+          <li class="skill-item"><span class="skill-dot"></span> C++ (robotics)</li>
+          <li class="skill-item"><span class="skill-dot"></span> TypeScript / JavaScript</li>
+          <li class="skill-item"><span class="skill-dot"></span> Python</li>
+          <li class="skill-item"><span class="skill-dot"></span> HTML & CSS</li>
+          <li class="skill-item"><span class="skill-dot"></span> SQL / JSON</li>
+          <li class="skill-item"><span class="skill-dot"></span> Lua</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <div class="skill-group-header"><span class="skill-group-icon">🎮</span><span class="skill-group-name" data-i18n="sg2">Game Development</span></div>
+        <ul class="skill-list">
+          <li class="skill-item"><span class="skill-dot"></span> Unity 3D (URP)</li>
+          <li class="skill-item"><span class="skill-dot"></span> Shader Graph</li>
+          <li class="skill-item"><span class="skill-dot"></span> VFX Graph</li>
+          <li class="skill-item"><span class="skill-dot"></span> NavMesh / AI</li>
+          <li class="skill-item"><span class="skill-dot"></span> Animator / Blend Trees</li>
+          <li class="skill-item"><span class="skill-dot"></span> Timeline & Cinemachine</li>
+          <li class="skill-item"><span class="skill-dot"></span> Object pooling / LOD</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <div class="skill-group-header"><span class="skill-group-icon">🌐</span><span class="skill-group-name" data-i18n="sg3">Web & Software</span></div>
+        <ul class="skill-list">
+          <li class="skill-item"><span class="skill-dot"></span> React</li>
+          <li class="skill-item"><span class="skill-dot"></span> ASP.NET Core</li>
+          <li class="skill-item"><span class="skill-dot"></span> MySQL</li>
+          <li class="skill-item"><span class="skill-dot"></span> REST APIs</li>
+          <li class="skill-item"><span class="skill-dot"></span> Git</li>
+          <li class="skill-item"><span class="skill-dot"></span> Full-stack architecture</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <div class="skill-group-header"><span class="skill-group-icon">🎨</span><span class="skill-group-name" data-i18n="sg4">3D & Art</span></div>
+        <ul class="skill-list">
+          <li class="skill-item"><span class="skill-dot"></span> Blender (modeling & rigging)</li>
+          <li class="skill-item"><span class="skill-dot"></span> UV Unwrapping</li>
+          <li class="skill-item"><span class="skill-dot"></span> Krita (texturing)</li>
+          <li class="skill-item"><span class="skill-dot"></span> 3D asset integration</li>
+          <li class="skill-item"><span class="skill-dot"></span> GPU instancing</li>
+          <li class="skill-item"><span class="skill-dot"></span> Occlusion culling</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="container">
+    <div class="section-label" data-i18n="goals_label">Vision</div>
+    <div class="section-title" data-i18n="goals_title">Where I'm headed</div>
+    <p class="section-desc" data-i18n="goals_desc">I'm not done building. This is just the beginning.</p>
+    <div class="goals-grid">
+      <div class="goal-card fade-up"><div class="goal-num">01</div><div class="goal-title" data-i18n="goal1_t">Ship Eteria</div><div class="goal-desc" data-i18n="goal1_d">Finish and launch Eteria as a real playable game. It's been two years in the making — it deserves to be in players' hands.</div></div>
+      <div class="goal-card fade-up"><div class="goal-num">02</div><div class="goal-title" data-i18n="goal2_t">World Finals 2027</div><div class="goal-desc" data-i18n="goal2_d">Represent Costa Rica at Infomatrix World Finals in Bucharest, Romania. Compete at the highest student level internationally.</div></div>
+      <div class="goal-card fade-up"><div class="goal-num">03</div><div class="goal-title" data-i18n="goal3_t">Study abroad</div><div class="goal-desc" data-i18n="goal3_d">Apply to top universities with strong CS and game development programs. I want to be in an environment that matches my ambition.</div></div>
+      <div class="goal-card fade-up"><div class="goal-num">04</div><div class="goal-title" data-i18n="goal4_t">Work on hard problems</div><div class="goal-desc" data-i18n="goal4_d">Join a game studio, tech company, or startup where I can contribute to something ambitious and keep growing as an engineer.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="fade-up">
+        <div class="section-label" data-i18n="contact_label">Contact</div>
+        <div class="section-title" data-i18n="contact_title">Let's talk</div>
+        <p class="contact-form-note" data-i18n="contact_p1">I'm open to conversations about <strong>university opportunities</strong>, <strong>internships</strong>, <strong>game development projects</strong>, and <strong>collaborations</strong>. If you're a recruiter, admissions officer, or fellow builder — reach out.</p>
+        <p class="contact-form-note" style="margin-top: 0.75rem;" data-i18n="contact_p2">I'm based in <strong>Costa Rica</strong> and available remotely. My spoken languages are Spanish (native) and English (professional).</p>
+      </div>
+      <div class="fade-up">
+        <div class="contact-links">
+          <a href="mailto:tianaq26@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            <div><span class="contact-link-label" data-i18n="cl_email">Email</span><span class="contact-link-val">tianaq26@gmail.com</span></div>
+          </a>
+          <a href="https://github.com/Tianaq26" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🐙</div>
+            <div><span class="contact-link-label">GitHub</span><span class="contact-link-val">github.com/Tianaq26</span></div>
+          </a>
+          <a href="https://tianaq26.github.io/Eteria/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🎮</div>
+            <div><span class="contact-link-label" data-i18n="cl_eteria">Eteria — project website</span><span class="contact-link-val">tianaq26.github.io/Eteria</span></div>
+          </a>
+          <a href="https://figutrades.vercel.app/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🛒</div>
+            <div><span class="contact-link-label" data-i18n="cl_figutrades">FiguTrades — live app</span><span class="contact-link-val">figutrades.vercel.app</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Sebastián Aguilar Quesada · Costa Rica</div>
+  <div class="footer-links">
+    <a href="https://tianaq26.github.io/Eteria/" target="_blank">Eteria</a>
+    <a href="https://figutrades.vercel.app/" target="_blank">FiguTrades</a>
+    <a href="https://github.com/Tianaq26" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    nav_about: "About", nav_achievement: "Journey", nav_eteria: "Eteria",
+    nav_projects: "Projects", nav_skills: "Skills", nav_contact: "Contact",
+    hero_badge: "🥇 Gold Medal — Infomatrix Iberoamérica 2026",
+    hero_h1: `Building games,<br/>software <span class="dim">&</span> ideas<br/><span class="accent">from scratch.</span>`,
+    hero_sub: "I'm Sebastián Aguilar — a self-taught developer from Costa Rica. I build open-world RPGs, full-stack applications, and robotic systems. 18 years old, already competing internationally.",
+    hero_cta1: "See my main project →", hero_cta2: "Get in touch",
+    stat1: "Years building Eteria", stat2: "National + Iberoamérica Gold",
+    stat3: "World Finals — Bucharest", stat4: "Languages & frameworks",
+    ach_label: "Recognition", ach_title: "An international journey",
+    ach_desc: "Three stages. One project. From a national competition in Costa Rica to the Iberoamerican final — and now qualified for the world stage.",
+    tl1_year: "Infomatrix Costa Rica · 2025",
+    tl1_title: "Gold Medal — National Competition",
+    tl1_sub: "Software Development category · Costa Rica",
+    tl1_desc: "I competed in the national edition of Infomatrix, the largest student technology competition in the country, presenting Eteria as my project. I won Gold in the Software Development category — earning the right to represent Costa Rica at the Iberoamerican stage.",
+    tl1_pill: "Gold Medal — Qualified for Iberoamérica",
+    tl2_year: "Infomatrix Iberoamérica · June 2026 · San Luis Potosí, Mexico",
+    tl2_title: "Gold Medal — Iberoamerican Final",
+    tl2_sub: "Software Development · Representing Costa Rica",
+    tl2_desc: "Competing against teams from across Latin America, the best student developers in the Iberoamerican region. I presented Eteria before an international jury and won Gold again in Software Development, earning direct accreditation to the World Finals.",
+    tl2_pill: "Gold Medal — Qualified for World Finals",
+    tl3_year: "Infomatrix World Finals · 2027 · Bucharest, Romania",
+    tl3_title: "World Finals — Coming Next",
+    tl3_sub: "Qualified · Representing Costa Rica",
+    tl3_desc: "The next chapter. I'll be competing at the Infomatrix World Finals in Bucharest against the best student teams from over 30 countries. The same project, the same drive — on the biggest stage yet.",
+    tl3_pill: "Qualified · 2027",
+    about_label: "About me", about_title: "Builder by instinct, developer by choice.",
+    about_p1: "I'm an 18-year-old developer from Costa Rica with a passion for building <strong>complex, ambitious projects</strong> from the ground up. I've been coding, designing, and iterating since before I had any formal training in it.",
+    about_p2: "My main focus is <strong>game development and software engineering</strong>, but I also work with 3D modeling, shaders, VFX, robotics, and hardware. I'm the kind of person who, when faced with a problem I don't know how to solve, just goes and learns how to solve it.",
+    about_p3: "I've spent the last two years building Eteria — an open-world RPG with AI-driven NPCs, custom shaders, a full combat system, and a handcrafted 3D world. Not for a school project. Because I want it to exist.",
+    about_p4: "Next step: university abroad. I'm looking for environments where ambitious builders can grow fast, work on hard problems, and make real things.",
+    pillar1_name: "Game Development", pillar1_desc: "Unity, C#, gameplay systems, AI, combat, shaders, VFX, optimization",
+    pillar2_name: "Software Engineering", pillar2_desc: "Full-stack development with React, TypeScript, ASP.NET, and MySQL",
+    pillar3_name: "3D & Technical Art", pillar3_desc: "Blender modeling, UV unwrapping, rigging, shader graphs, Krita textures",
+    pillar4_name: "Robotics & Hardware", pillar4_desc: "ESP32, servo motors, ultrasonic sensors, C++, control logic",
+    pillar5_name: "3D Printing & Prototyping", pillar5_desc: "Physical prototyping, TPU materials, functional geometry, custom manufacturing",
+    flag_badge: "⭐ Flagship project",
+    flag_desc1: "An open-world RPG developed solo in Unity over two-plus years. Eteria features five islands with distinct biomes, a full dragon system with capture, taming, and rideable flight, turn-based elemental combat, AI-driven NPCs, handcrafted 3D assets, and a complete UI system — all running stably on low-end hardware.",
+    flag_desc2: "This project is the clearest demonstration of what I can do: sustain a large, multi-system codebase over time, learn new technologies as needed, and deliver something polished. The same project that won Gold at both national and Iberoamerican Infomatrix.",
+    flag_link1: "View project site →",
+    sys1_name: "Dragon System", sys2_name: "Combat Engine", sys3_name: "NPC AI",
+    sys4_name: "Custom Shaders", sys5_name: "VFX Systems", sys6_name: "Dynamic UI",
+    sys7_name: "Optimization", sys8_name: "Cinematics", sys9_name: "Open World", sys10_name: "Data Systems",
+    proj_label: "Projects", proj_title: "What else I've built",
+    proj_desc: "Beyond Eteria, I've shipped a full-stack web app, built a competitive sumobot, and launched a 3D printing business.",
+    proj1_cat: "Software Engineering · Full-stack",
+    proj1_desc: "A full-stack marketplace for trading collectibles. Built end-to-end: React + TypeScript frontend, C# ASP.NET backend, and MySQL database. Product-quality architecture, real deployment.",
+    proj2_cat: "Entrepreneurship · 3D Printing",
+    proj2_desc: "A personal 3D printing business where I handle design, manufacturing, and sales. Includes experimentation with TPU materials, functional geometry, and physical prototyping pipelines.",
+    proj3_cat: "Robotics · Hardware",
+    proj3_name: "SumoBot — 3rd Place, CENFOTEC",
+    proj3_desc: "A competitive sumobot built for the CENFOTEC robotics competition in Grecia. Programmed in C++ on an ESP32 with ultrasonic distance sensing and servo-controlled actuation. Placed 3rd nationally.",
+    proj4_cat: "Community · Education",
+    proj4_name: "Programming Club — CTP Mario Quirós",
+    proj4_desc: "After winning at Infomatrix, I founded a school programming club to share what I had learned. Over 15 students are now building their own projects in software, games, and hardware.",
+    skills_label: "Tech Stack", skills_title: "Skills & tools",
+    sg1: "Languages", sg2: "Game Development", sg3: "Web & Software", sg4: "3D & Art",
+    goals_label: "Vision", goals_title: "Where I'm headed", goals_desc: "I'm not done building. This is just the beginning.",
+    goal1_t: "Ship Eteria", goal1_d: "Finish and launch Eteria as a real playable game. It's been two years in the making — it deserves to be in players' hands.",
+    goal2_t: "World Finals 2027", goal2_d: "Represent Costa Rica at Infomatrix World Finals in Bucharest, Romania. Compete at the highest student level internationally.",
+    goal3_t: "Study abroad", goal3_d: "Apply to top universities with strong CS and game development programs. I want to be in an environment that matches my ambition.",
+    goal4_t: "Work on hard problems", goal4_d: "Join a game studio, tech company, or startup where I can contribute to something ambitious and keep growing as an engineer.",
+    contact_label: "Contact", contact_title: "Let's talk",
+    contact_p1: "I'm open to conversations about <strong>university opportunities</strong>, <strong>internships</strong>, <strong>game development projects</strong>, and <strong>collaborations</strong>. If you're a recruiter, admissions officer, or fellow builder — reach out.",
+    contact_p2: "I'm based in <strong>Costa Rica</strong> and available remotely. My spoken languages are Spanish (native) and English (professional).",
+    cl_email: "Email", cl_eteria: "Eteria — project website", cl_figutrades: "FiguTrades — live app"
+  },
+  es: {
+    nav_about: "Sobre mí", nav_achievement: "Trayectoria", nav_eteria: "Eteria",
+    nav_projects: "Proyectos", nav_skills: "Habilidades", nav_contact: "Contacto",
+    hero_badge: "🥇 Medalla de Oro — Infomatrix Iberoamérica 2026",
+    hero_h1: `Construyendo juegos,<br/>software <span class="dim">&</span> ideas<br/><span class="accent">desde cero.</span>`,
+    hero_sub: "Soy Sebastián Aguilar — desarrollador autodidacta de Costa Rica. Construyo RPGs de mundo abierto, aplicaciones full-stack y sistemas robóticos. 18 años, ya compitiendo a nivel internacional.",
+    hero_cta1: "Ver mi proyecto principal →", hero_cta2: "Contáctame",
+    stat1: "Años construyendo Eteria", stat2: "Oro Nacional + Iberoamérica",
+    stat3: "Final Mundial — Bucarest", stat4: "Lenguajes y frameworks",
+    ach_label: "Reconocimientos", ach_title: "Un camino internacional",
+    ach_desc: "Tres etapas. Un proyecto. De una competencia nacional en Costa Rica a la final iberoamericana — y ahora clasificado a la etapa mundial.",
+    tl1_year: "Infomatrix Costa Rica · 2025",
+    tl1_title: "Medalla de Oro — Competencia Nacional",
+    tl1_sub: "Categoría Desarrollo de Software · Costa Rica",
+    tl1_desc: "Competí en la edición nacional de Infomatrix, la competencia de tecnología estudiantil más grande del país, presentando Eteria como mi proyecto. Gané el Oro en la categoría de Desarrollo de Software, obteniendo el derecho de representar a Costa Rica en la etapa Iberoamericana.",
+    tl1_pill: "Medalla de Oro — Clasificado a Iberoamérica",
+    tl2_year: "Infomatrix Iberoamérica · Junio 2026 · San Luis Potosí, México",
+    tl2_title: "Medalla de Oro — Final Iberoamericana",
+    tl2_sub: "Desarrollo de Software · Representando a Costa Rica",
+    tl2_desc: "Compitiendo contra equipos de toda Latinoamérica, los mejores desarrolladores estudiantiles de la región iberoamericana. Presenté Eteria ante un jurado internacional y gané el Oro nuevamente en Desarrollo de Software, obteniendo acreditación directa a la Final Mundial.",
+    tl2_pill: "Medalla de Oro — Clasificado a Final Mundial",
+    tl3_year: "Final Mundial Infomatrix · 2027 · Bucarest, Rumania",
+    tl3_title: "Final Mundial — Lo que viene",
+    tl3_sub: "Clasificado · Representando a Costa Rica",
+    tl3_desc: "El siguiente capítulo. Competiré en la Final Mundial de Infomatrix en Bucarest contra los mejores equipos estudiantiles de más de 30 países. El mismo proyecto, la misma determinación — en el escenario más grande hasta ahora.",
+    tl3_pill: "Clasificado · 2027",
+    about_label: "Sobre mí", about_title: "Constructor por instinto, desarrollador por elección.",
+    about_p1: "Soy un desarrollador de 18 años de Costa Rica con pasión por construir <strong>proyectos complejos y ambiciosos</strong> desde cero. Llevo años programando, diseñando e iterando antes de tener cualquier educación formal en ello.",
+    about_p2: "Mi enfoque principal es el <strong>desarrollo de videojuegos y la ingeniería de software</strong>, pero también trabajo con modelado 3D, shaders, VFX, robótica y hardware. Soy el tipo de persona que, cuando enfrenta un problema que no sabe resolver, simplemente aprende cómo hacerlo.",
+    about_p3: "He pasado los últimos dos años construyendo Eteria — un RPG de mundo abierto con NPCs con IA, shaders personalizados, un sistema de combate completo y un mundo 3D hecho a mano. No para un proyecto escolar. Porque quiero que exista.",
+    about_p4: "Próximo paso: universidad en el extranjero. Busco entornos donde los builders ambiciosos puedan crecer rápido, trabajar en problemas difíciles y crear cosas reales.",
+    pillar1_name: "Desarrollo de Videojuegos", pillar1_desc: "Unity, C#, sistemas de gameplay, IA, combate, shaders, VFX, optimización",
+    pillar2_name: "Ingeniería de Software", pillar2_desc: "Desarrollo full-stack con React, TypeScript, ASP.NET y MySQL",
+    pillar3_name: "Arte 3D & Técnico", pillar3_desc: "Modelado en Blender, UV unwrapping, rigging, shader graphs, texturas en Krita",
+    pillar4_name: "Robótica & Hardware", pillar4_desc: "ESP32, servomotores, sensores ultrasónicos, C++, lógica de control",
+    pillar5_name: "Impresión 3D & Prototipado", pillar5_desc: "Prototipado físico, materiales TPU, geometría funcional, fabricación personalizada",
+    flag_badge: "⭐ Proyecto principal",
+    flag_desc1: "Un RPG de mundo abierto desarrollado en solitario en Unity durante más de dos años. Eteria presenta cinco islas con biomas distintos, un sistema completo de dragones con captura, doma y vuelo montable, combate elemental por turnos, NPCs con IA dinámica, assets 3D hechos a mano y un sistema de UI completo — todo funcionando establemente en hardware de gama baja.",
+    flag_desc2: "Este proyecto es la demostración más clara de lo que soy capaz: mantener una base de código grande y multi-sistema durante mucho tiempo, aprender nuevas tecnologías según se necesiten y entregar algo pulido. El mismo proyecto que ganó el Oro en Infomatrix tanto nacional como iberoamericano.",
+    flag_link1: "Ver sitio del proyecto →",
+    sys1_name: "Sistema de Dragones", sys2_name: "Motor de Combate", sys3_name: "IA de NPCs",
+    sys4_name: "Shaders Personalizados", sys5_name: "Sistemas VFX", sys6_name: "UI Dinámica",
+    sys7_name: "Optimización", sys8_name: "Cinemáticas", sys9_name: "Mundo Abierto", sys10_name: "Sistemas de Datos",
+    proj_label: "Proyectos", proj_title: "Qué más he construido",
+    proj_desc: "Más allá de Eteria, he lanzado una aplicación web full-stack, construido un sumobot competitivo y creado un negocio de impresión 3D.",
+    proj1_cat: "Ingeniería de Software · Full-stack",
+    proj1_desc: "Un marketplace full-stack para intercambiar coleccionables. Construido de principio a fin: frontend con React + TypeScript, backend en C# ASP.NET y base de datos MySQL. Arquitectura de calidad de producto, deployment real.",
+    proj2_cat: "Emprendimiento · Impresión 3D",
+    proj2_desc: "Un negocio personal de impresión 3D donde me encargo del diseño, fabricación y ventas. Incluye experimentación con materiales TPU, geometría funcional y pipelines de prototipado físico.",
+    proj3_cat: "Robótica · Hardware",
+    proj3_name: "SumoBot — 3er Lugar, CENFOTEC",
+    proj3_desc: "Un sumobot competitivo construido para la competencia de robótica CENFOTEC en Grecia. Programado en C++ sobre un ESP32 con detección de distancia por ultrasonido y actuación controlada por servomotores. Tercer lugar nacional.",
+    proj4_cat: "Comunidad · Educación",
+    proj4_name: "Club de Programación — CTP Mario Quirós",
+    proj4_desc: "Tras ganar en Infomatrix, fundé un club de programación en el colegio para compartir lo aprendido. Más de 15 estudiantes ya están construyendo sus propios proyectos en software, videojuegos y hardware.",
+    skills_label: "Stack Tecnológico", skills_title: "Habilidades y herramientas",
+    sg1: "Lenguajes", sg2: "Desarrollo de Juegos", sg3: "Web & Software", sg4: "Arte 3D",
+    goals_label: "Visión", goals_title: "Hacia dónde voy", goals_desc: "No he terminado de construir. Esto es solo el comienzo.",
+    goal1_t: "Lanzar Eteria", goal1_d: "Terminar y lanzar Eteria como un juego real y jugable. Lleva dos años en desarrollo — merece estar en manos de los jugadores.",
+    goal2_t: "Final Mundial 2027", goal2_d: "Representar a Costa Rica en la Final Mundial de Infomatrix en Bucarest, Rumania. Competir al más alto nivel estudiantil internacional.",
+    goal3_t: "Estudiar en el extranjero", goal3_d: "Aplicar a universidades top con programas fuertes en CS y desarrollo de videojuegos. Quiero estar en un entorno que esté a la altura de mi ambición.",
+    goal4_t: "Resolver problemas difíciles", goal4_d: "Unirme a un estudio de videojuegos, empresa tech o startup donde pueda contribuir a algo ambicioso y seguir creciendo como ingeniero.",
+    contact_label: "Contacto", contact_title: "Hablemos",
+    contact_p1: "Estoy abierto a conversaciones sobre <strong>oportunidades universitarias</strong>, <strong>pasantías</strong>, <strong>proyectos de desarrollo de videojuegos</strong> y <strong>colaboraciones</strong>. Si eres reclutador, oficial de admisiones o un fellow builder — escríbeme.",
+    contact_p2: "Estoy en <strong>Costa Rica</strong> y disponible de forma remota. Mis idiomas son español (nativo) e inglés (profesional).",
+    cl_email: "Correo", cl_eteria: "Eteria — sitio del proyecto", cl_figutrades: "FiguTrades — app en vivo"
+  }
+};
+
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  applyLang(currentLang);
+  const btn = document.getElementById('langToggle');
+  const flag = document.getElementById('langFlag');
+  const label = document.getElementById('langLabel');
+  if (currentLang === 'es') {
+    flag.textContent = '🇺🇸';
+    label.textContent = 'EN';
+  } else {
+    flag.textContent = '🇪🇸';
+    label.textContent = 'ES';
+  }
+  document.documentElement.lang = currentLang;
+}
+
+function applyLang(lang) {
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+}
+</script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
