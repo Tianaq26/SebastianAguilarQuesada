@@ -1,6 +1,6 @@
 """
 Eteria — Game Art Reference Generator
-Generates DALL-E 3 reference images organized by region and category.
+Generates reference images for game art organized by region and category.
 
 Categories:
   consumables  — items, plants, ingredients  (flat gray bg, front view)
@@ -8,21 +8,28 @@ Categories:
   architecture — houses and key locations    (exterior/environment view)
   npcs         — village character designs   (full body, front view, character sheet)
 
-Usage:
+Providers (pick one):
+  huggingface  FREE — needs a free HF token from huggingface.co/settings/tokens
+  openai       PAID — needs an OpenAI API key (~$3.50 for all 88 images)
+
+── Hugging Face (FREE) ──────────────────────────────────────────────
+    1. Create a free account at huggingface.co
+    2. Go to huggingface.co/settings/tokens → New token (read access)
+    3. export HF_TOKEN="hf_..."
+    4. python generate_art_references.py --provider huggingface
+
+── OpenAI DALL-E 3 (PAID) ───────────────────────────────────────────
     export OPENAI_API_KEY="sk-..."
-    python generate_art_references.py
+    python generate_art_references.py --provider openai
 
-    # Only one region:
-    python generate_art_references.py --region VALKAR
-
-    # Only one category:
-    python generate_art_references.py --only npcs
-
-    # Dry run (print prompts, no API calls):
-    python generate_art_references.py --dry-run
+── Other flags ──────────────────────────────────────────────────────
+    --region VALKAR          only one region
+    --only   npcs            only one category
+    --dry-run                print prompts, no API calls
 """
 
 import argparse
+import io
 import json
 import os
 import sys
@@ -31,9 +38,8 @@ from pathlib import Path
 
 try:
     import requests
-    from openai import OpenAI
 except ImportError:
-    print("Missing dependencies. Run: pip install openai requests")
+    print("Missing dependency. Run: pip install requests")
     sys.exit(1)
 
 
@@ -800,11 +806,53 @@ def build_prompt(item: dict, region_aesthetic: str, category: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# IMAGE GENERATION
+# IMAGE GENERATION — provider backends
 # ---------------------------------------------------------------------------
 
+# Hugging Face model: FLUX.1-schnell gives excellent quality for free.
+HF_MODEL = "black-forest-labs/FLUX.1-schnell"
+HF_API_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
+
+
+def _generate_huggingface(prompt: str, hf_token: str) -> bytes:
+    headers = {"Authorization": f"Bearer {hf_token}"}
+    payload = {
+        "inputs": prompt,
+        "parameters": {"width": 1024, "height": 1024, "num_inference_steps": 4},
+    }
+    for attempt in range(3):
+        resp = requests.post(HF_API_URL, headers=headers, json=payload, timeout=120)
+        if resp.status_code == 200:
+            return resp.content
+        if resp.status_code == 503:
+            # Model loading — wait and retry
+            wait = int(resp.json().get("estimated_time", 20))
+            print(f"      Model loading, waiting {wait}s...")
+            time.sleep(min(wait, 60))
+        else:
+            raise RuntimeError(f"HF API {resp.status_code}: {resp.text[:200]}")
+    raise RuntimeError("HuggingFace API did not respond after 3 attempts")
+
+
+def _generate_openai(prompt: str, openai_client) -> bytes:
+    response = openai_client.images.generate(
+        model="dall-e-3",
+        prompt=prompt,
+        size="1024x1024",
+        quality="standard",
+        n=1,
+    )
+    image_url = response.data[0].url
+    return requests.get(image_url, timeout=30).content
+
+
 def generate_and_save(
-    client: "OpenAI", prompt: str, output_path: Path, dry_run: bool
+    prompt: str,
+    output_path: Path,
+    provider: str,
+    hf_token: str | None,
+    openai_client,
+    dry_run: bool,
 ) -> bool:
     if dry_run:
         print(f"    [DRY RUN] {output_path.name}")
@@ -816,15 +864,11 @@ def generate_and_save(
         return True
 
     try:
-        response = client.images.generate(
-            model="dall-e-3",
-            prompt=prompt,
-            size="1024x1024",
-            quality="standard",
-            n=1,
-        )
-        image_url = response.data[0].url
-        img_data = requests.get(image_url, timeout=30).content
+        if provider == "huggingface":
+            img_data = _generate_huggingface(prompt, hf_token)
+        else:
+            img_data = _generate_openai(prompt, openai_client)
+
         output_path.write_bytes(img_data)
         print(f"    [OK] {output_path.name}")
         return True
@@ -839,7 +883,13 @@ def generate_and_save(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate Eteria game art references with DALL-E 3"
+        description="Generate Eteria game art references (free or paid)"
+    )
+    parser.add_argument(
+        "--provider",
+        choices=["huggingface", "openai"],
+        default="huggingface",
+        help="Image provider: 'huggingface' (free) or 'openai' (paid, better quality)",
     )
     parser.add_argument(
         "--region", choices=list(REGIONS.keys()), help="Generate only this region"
@@ -856,12 +906,30 @@ def main():
     )
     args = parser.parse_args()
 
-    api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key and not args.dry_run:
-        print("ERROR: Set the OPENAI_API_KEY environment variable.")
-        sys.exit(1)
+    hf_token = None
+    openai_client = None
 
-    client = OpenAI(api_key=api_key) if not args.dry_run else None
+    if not args.dry_run:
+        if args.provider == "huggingface":
+            hf_token = os.environ.get("HF_TOKEN")
+            if not hf_token:
+                print("ERROR: Set HF_TOKEN (free at huggingface.co/settings/tokens)")
+                sys.exit(1)
+        else:
+            api_key = os.environ.get("OPENAI_API_KEY")
+            if not api_key:
+                print("ERROR: Set OPENAI_API_KEY environment variable.")
+                sys.exit(1)
+            try:
+                from openai import OpenAI
+            except ImportError:
+                print("Missing dependency. Run: pip install openai")
+                sys.exit(1)
+            openai_client = OpenAI(api_key=api_key)
+
+    print(f"Provider: {args.provider.upper()}")
+    if args.provider == "huggingface":
+        print(f"Model:    {HF_MODEL}")
 
     output_root = Path("art_references")
     output_root.mkdir(exist_ok=True)
@@ -896,7 +964,10 @@ def main():
                 output_path = cat_dir / f"{safe_name}.png"
                 prompt = build_prompt(item, aesthetic, category)
 
-                ok = generate_and_save(client, prompt, output_path, args.dry_run)
+                ok = generate_and_save(
+                    prompt, output_path,
+                    args.provider, hf_token, openai_client, args.dry_run,
+                )
                 log.append(
                     {
                         "region": region_name,
@@ -907,7 +978,8 @@ def main():
                     }
                 )
                 if not args.dry_run and ok:
-                    time.sleep(1)  # respect DALL-E rate limits
+                    # HF free tier: be gentle to avoid rate limits
+                    time.sleep(2 if args.provider == "huggingface" else 1)
 
     # Save summary log
     log_path = output_root / "generation_log.json"
