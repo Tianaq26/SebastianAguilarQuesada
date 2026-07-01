@@ -1,0 +1,7 @@
+# Generated art — images are large binaries, keep them local
+art_references/
+
+# Python
+__pycache__/
+*.pyc
+.env
