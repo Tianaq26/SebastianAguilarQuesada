@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sebastián Aguilar — Game Developer & Software Engineer</title>
-  <meta name="description" content="Portfolio of Sebastián Aguilar — Game developer, software engineer, and builder from Costa Rica. Gold medalist at Infomatrix." />
+  <meta name="description" content="Portfolio of Sebastián Aguilar — Game developer, software engineer, and builder from Costa Rica. Creator of Eteria and Eteria Robotics Studio. Gold medalist at Infomatrix." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -135,6 +135,18 @@
     .project-name { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
     .project-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+    .status-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.04); border: 1px solid var(--border-hover); color: var(--text-dim); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 100px; }
+    .status-pill::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--text-dim); }
+    .project-note { font-size: 0.78rem; color: var(--text-dim); line-height: 1.55; border-left: 2px solid var(--border-hover); padding-left: 0.7rem; }
+
+    /* ROBOTICS STUDIO */
+    #studio { position: relative; overflow: hidden; }
+    #studio .hero-grid-bg { opacity: 0.6; pointer-events: none; }
+    #studio .container { position: relative; z-index: 1; }
+    .studio-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin: 0 0 1.5rem; }
+    .studio-list li { display: flex; align-items: start; gap: 0.6rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .studio-list li::before { content: '▹'; color: var(--accent-light); flex-shrink: 0; }
+    .studio-list li strong { color: var(--text); font-weight: 600; }
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
@@ -199,6 +211,7 @@
       <li><a href="#about" data-i18n="nav_about">About</a></li>
       <li><a href="#achievement" data-i18n="nav_achievement">Journey</a></li>
       <li><a href="#flagship" data-i18n="nav_eteria">Eteria</a></li>
+      <li><a href="#studio" data-i18n="nav_studio">Robotics Studio</a></li>
       <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
       <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
       <li><a href="#contact" class="nav-cta" data-i18n="nav_contact">Contact</a></li>
@@ -308,6 +321,7 @@
         <p data-i18n="about_p1">I'm an 18-year-old developer from Costa Rica with a passion for building <strong>complex, ambitious projects</strong> from the ground up. I've been coding, designing, and iterating since before I had any formal training in it.</p>
         <p data-i18n="about_p2">My main focus is <strong>game development and software engineering</strong>, but I also work with 3D modeling, shaders, VFX, robotics, and hardware. I'm the kind of person who, when faced with a problem I don't know how to solve, just goes and learns how to solve it.</p>
         <p data-i18n="about_p3">I've spent the last two years building Eteria — an open-world RPG with AI-driven NPCs, custom shaders, a full combat system, and a handcrafted 3D world. Not for a school project. Because I want it to exist.</p>
+        <p data-i18n="about_p_studio">That instinct carried into robotics: I built <strong>Eteria Robotics Studio</strong>, a web platform where anyone can program a sumobot in Python or JavaScript, watch it fight in a 3D simulator, and then send the same code to a real board. It's the project I use to teach what I've learned.</p>
         <p data-i18n="about_p4">Next step: university abroad. I'm looking for environments where ambitious builders can grow fast, work on hard problems, and make real things.</p>
       </div>
       <div class="about-pillars fade-up">
@@ -329,7 +343,7 @@
         <div class="pillar-card">
           <div class="pillar-icon">🤖</div>
           <div class="pillar-name" data-i18n="pillar4_name">Robotics & Hardware</div>
-          <div class="pillar-desc" data-i18n="pillar4_desc">ESP32, servo motors, ultrasonic sensors, C++, control logic</div>
+          <div class="pillar-desc" data-i18n="pillar4_desc">ESP32, IdeaBoard, servo motors, ultrasonic sensors, C++, CircuitPython, robot simulation</div>
         </div>
         <div class="pillar-card">
           <div class="pillar-icon">🖨️</div>
@@ -377,20 +391,64 @@
   </div>
 </section>
 
+<!-- ROBOTICS STUDIO -->
+<section id="studio">
+  <div class="hero-grid-bg"></div>
+  <div class="container">
+    <div class="flagship-inner">
+      <div class="fade-up">
+        <div class="flagship-badge" data-i18n="studio_badge">🤖 Robotics platform · Live</div>
+        <div class="flagship-title">Eteria Robotics Studio</div>
+        <div class="flagship-alt" data-i18n="studio_alt">// program, train and battle virtual sumobots</div>
+        <p class="flagship-desc" data-i18n="studio_desc1">A browser-based platform for learning robotics by building it. You write a sumobot's logic in JavaScript or Python inside a real code editor, press run, and watch the match play out in a 3D arena — following the official CENFOTEC mini sumo competition rules. No installs, no setup, no hardware required to start.</p>
+        <p class="flagship-desc" data-i18n="studio_desc2">Underneath runs a custom deterministic physics engine with OBB collision detection and simulated IR, sonar and contact sensors, so every match is reproducible from a seed. Python executes through Pyodide in a Web Worker with CircuitPython shims, rendering happens in Three.js, and a service worker enables the cross-origin isolation the runtime needs on GitHub Pages.</p>
+        <p class="flagship-desc" data-i18n="studio_desc3">It's also a full course. Seven progressive worlds take a student from first movement to sensor reading, state machines, curved maneuvers, combat strategy, parameter optimization and a final tournament — with scaffolded hints, visible sonar cones, XP and levels. And once the virtual robot works, a Web Serial bridge pushes the same code to a real IdeaBoard over the MicroPython raw REPL: from simulation to hardware without leaving the tab.</p>
+        <ul class="studio-list">
+          <li data-i18n="studio_li1"><strong>SumoLab</strong> — the full lab: code editor, 3D simulation and total control.</li>
+          <li data-i18n="studio_li2"><strong>Learn</strong> — step-by-step guided missions. From zero to a competitive robot.</li>
+          <li data-i18n="studio_li3"><strong>Battle</strong> — tournaments, rivals and ranking. Coming soon.</li>
+        </ul>
+        <div class="flagship-tags">
+          <span class="tag">Three.js</span><span class="tag">Monaco Editor</span><span class="tag">Pyodide</span>
+          <span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">WebGL</span>
+          <span class="tag">Web Serial</span><span class="tag">Web Workers</span><span class="tag">Service Worker</span>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://tianaq26.github.io/Eteria-Robotics-Studio/" target="_blank" class="flagship-link" data-i18n="studio_link1">Open the platform →</a>
+          <a href="https://github.com/Tianaq26/Eteria-Robotics-Studio" target="_blank" class="flagship-link" style="color: var(--text-muted);">GitHub →</a>
+        </div>
+      </div>
+      <div class="systems-grid fade-up">
+        <div class="system-card"><div class="system-name" data-i18n="rs1_name">Simulation Engine</div><div class="system-tech">deterministic · seeded · OBB collisions</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs2_name">Virtual Sensors</div><div class="system-tech">IR · sonar cone · contact detection</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs3_name">Code Editor</div><div class="system-tech">Monaco · JavaScript · Python</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs4_name">Python Runtime</div><div class="system-tech">Pyodide · Web Worker · CircuitPython</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs5_name">3D Arena</div><div class="system-tech">Three.js · GLB models · real time</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs6_name">Guided Missions</div><div class="system-tech">7 worlds · hints · XP & levels</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs7_name">Hardware Bridge</div><div class="system-tech">Web Serial · IdeaBoard · raw REPL</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs8_name">Project Saving</div><div class="system-tech">File System API · IndexedDB fallback</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs9_name">Rival Bots</div><div class="system-tech">example strategies · headless testing</div></div>
+        <div class="system-card"><div class="system-name" data-i18n="rs10_name">Bilingual UI</div><div class="system-tech">ES / EN · responsive dock layout</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="section-label" data-i18n="proj_label">Projects</div>
     <div class="section-title" data-i18n="proj_title">What else I've built</div>
-    <p class="section-desc" data-i18n="proj_desc">Beyond Eteria, I've shipped a full-stack web app, built a competitive sumobot, and launched a 3D printing business.</p>
+    <p class="section-desc" data-i18n="proj_desc">Beyond Eteria and the Robotics Studio, I've built a full-stack marketplace, a competitive sumobot, and launched a 3D printing business.</p>
     <div class="projects-grid">
-      <a href="https://figutrades.vercel.app/" target="_blank" class="project-card">
-        <div class="project-header"><div class="project-icon teal">🛒</div><span class="project-arrow">↗</span></div>
+      <div class="project-card" style="cursor: default;">
+        <div class="project-header"><div class="project-icon teal">🛒</div><span class="status-pill" data-i18n="proj1_status">Offline</span></div>
         <div class="project-category" data-i18n="proj1_cat">Software Engineering · Full-stack</div>
         <div class="project-name">FiguTrades</div>
-        <p class="project-desc" data-i18n="proj1_desc">A full-stack marketplace for trading collectibles. Built end-to-end: React + TypeScript frontend, C# ASP.NET backend, and MySQL database. Product-quality architecture, real deployment.</p>
+        <p class="project-desc" data-i18n="proj1_desc">A full-stack marketplace for trading collectibles: React + TypeScript frontend, C# ASP.NET backend and MySQL database.</p>
+        <p class="project-note" data-i18n="proj1_note">This platform is no longer online: the free backend hosting it ran on ran out, so the deployment is down.</p>
         <div class="project-tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">ASP.NET</span><span class="tag">MySQL</span></div>
-      </a>
+      </div>
       <a href="https://tianaq26.github.io/Mundos_3D/" target="_blank" class="project-card">
         <div class="project-header"><div class="project-icon amber">🖨️</div><span class="project-arrow">↗</span></div>
         <div class="project-category" data-i18n="proj2_cat">Entrepreneurship · 3D Printing</div>
@@ -453,6 +511,10 @@
           <li class="skill-item"><span class="skill-dot"></span> ASP.NET Core</li>
           <li class="skill-item"><span class="skill-dot"></span> MySQL</li>
           <li class="skill-item"><span class="skill-dot"></span> REST APIs</li>
+          <li class="skill-item"><span class="skill-dot"></span> Three.js / WebGL</li>
+          <li class="skill-item"><span class="skill-dot"></span> Monaco Editor</li>
+          <li class="skill-item"><span class="skill-dot"></span> Pyodide / Web Workers</li>
+          <li class="skill-item"><span class="skill-dot"></span> Web Serial API</li>
           <li class="skill-item"><span class="skill-dot"></span> Git</li>
           <li class="skill-item"><span class="skill-dot"></span> Full-stack architecture</li>
         </ul>
@@ -511,9 +573,9 @@
             <div class="contact-link-icon">🎮</div>
             <div><span class="contact-link-label" data-i18n="cl_eteria">Eteria — project website</span><span class="contact-link-val">tianaq26.github.io/Eteria</span></div>
           </a>
-          <a href="https://figutrades.vercel.app/" target="_blank" class="contact-link">
-            <div class="contact-link-icon">🛒</div>
-            <div><span class="contact-link-label" data-i18n="cl_figutrades">FiguTrades — live app</span><span class="contact-link-val">figutrades.vercel.app</span></div>
+          <a href="https://tianaq26.github.io/Eteria-Robotics-Studio/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🤖</div>
+            <div><span class="contact-link-label" data-i18n="cl_studio">Eteria Robotics Studio — live platform</span><span class="contact-link-val">tianaq26.github.io/Eteria-Robotics-Studio</span></div>
           </a>
         </div>
       </div>
@@ -525,7 +587,7 @@
   <div class="footer-copy">© 2026 Sebastián Aguilar Quesada · Costa Rica</div>
   <div class="footer-links">
     <a href="https://tianaq26.github.io/Eteria/" target="_blank">Eteria</a>
-    <a href="https://figutrades.vercel.app/" target="_blank">FiguTrades</a>
+    <a href="https://tianaq26.github.io/Eteria-Robotics-Studio/" target="_blank">Robotics Studio</a>
     <a href="https://github.com/Tianaq26" target="_blank">GitHub</a>
   </div>
 </footer>
@@ -534,6 +596,7 @@
 const translations = {
   en: {
     nav_about: "About", nav_achievement: "Journey", nav_eteria: "Eteria",
+    nav_studio: "Robotics Studio",
     nav_projects: "Projects", nav_skills: "Skills", nav_contact: "Contact",
     hero_badge: "🥇 Gold Medal — Infomatrix Iberoamérica 2026",
     hero_h1: `Building games,<br/>software <span class="dim">&</span> ideas<br/><span class="accent">from scratch.</span>`,
@@ -562,11 +625,12 @@ const translations = {
     about_p1: "I'm an 18-year-old developer from Costa Rica with a passion for building <strong>complex, ambitious projects</strong> from the ground up. I've been coding, designing, and iterating since before I had any formal training in it.",
     about_p2: "My main focus is <strong>game development and software engineering</strong>, but I also work with 3D modeling, shaders, VFX, robotics, and hardware. I'm the kind of person who, when faced with a problem I don't know how to solve, just goes and learns how to solve it.",
     about_p3: "I've spent the last two years building Eteria — an open-world RPG with AI-driven NPCs, custom shaders, a full combat system, and a handcrafted 3D world. Not for a school project. Because I want it to exist.",
+    about_p_studio: "That instinct carried into robotics: I built <strong>Eteria Robotics Studio</strong>, a web platform where anyone can program a sumobot in Python or JavaScript, watch it fight in a 3D simulator, and then send the same code to a real board. It's the project I use to teach what I've learned.",
     about_p4: "Next step: university abroad. I'm looking for environments where ambitious builders can grow fast, work on hard problems, and make real things.",
     pillar1_name: "Game Development", pillar1_desc: "Unity, C#, gameplay systems, AI, combat, shaders, VFX, optimization",
     pillar2_name: "Software Engineering", pillar2_desc: "Full-stack development with React, TypeScript, ASP.NET, and MySQL",
     pillar3_name: "3D & Technical Art", pillar3_desc: "Blender modeling, UV unwrapping, rigging, shader graphs, Krita textures",
-    pillar4_name: "Robotics & Hardware", pillar4_desc: "ESP32, servo motors, ultrasonic sensors, C++, control logic",
+    pillar4_name: "Robotics & Hardware", pillar4_desc: "ESP32, IdeaBoard, servo motors, ultrasonic sensors, C++, CircuitPython, robot simulation",
     pillar5_name: "3D Printing & Prototyping", pillar5_desc: "Physical prototyping, TPU materials, functional geometry, custom manufacturing",
     flag_badge: "⭐ Flagship project",
     flag_desc1: "An open-world RPG developed solo in Unity over two-plus years. Eteria features five islands with distinct biomes, a full dragon system with capture, taming, and rideable flight, turn-based elemental combat, AI-driven NPCs, handcrafted 3D assets, and a complete UI system — all running stably on low-end hardware.",
@@ -575,10 +639,24 @@ const translations = {
     sys1_name: "Dragon System", sys2_name: "Combat Engine", sys3_name: "NPC AI",
     sys4_name: "Custom Shaders", sys5_name: "VFX Systems", sys6_name: "Dynamic UI",
     sys7_name: "Optimization", sys8_name: "Cinematics", sys9_name: "Open World", sys10_name: "Data Systems",
+    studio_badge: "🤖 Robotics platform · Live",
+    studio_alt: "// program, train and battle virtual sumobots",
+    studio_desc1: "A browser-based platform for learning robotics by building it. You write a sumobot's logic in JavaScript or Python inside a real code editor, press run, and watch the match play out in a 3D arena — following the official CENFOTEC mini sumo competition rules. No installs, no setup, no hardware required to start.",
+    studio_desc2: "Underneath runs a custom deterministic physics engine with OBB collision detection and simulated IR, sonar and contact sensors, so every match is reproducible from a seed. Python executes through Pyodide in a Web Worker with CircuitPython shims, rendering happens in Three.js, and a service worker enables the cross-origin isolation the runtime needs on GitHub Pages.",
+    studio_desc3: "It's also a full course. Seven progressive worlds take a student from first movement to sensor reading, state machines, curved maneuvers, combat strategy, parameter optimization and a final tournament — with scaffolded hints, visible sonar cones, XP and levels. And once the virtual robot works, a Web Serial bridge pushes the same code to a real IdeaBoard over the MicroPython raw REPL: from simulation to hardware without leaving the tab.",
+    studio_li1: "<strong>SumoLab</strong> — the full lab: code editor, 3D simulation and total control.",
+    studio_li2: "<strong>Learn</strong> — step-by-step guided missions. From zero to a competitive robot.",
+    studio_li3: "<strong>Battle</strong> — tournaments, rivals and ranking. Coming soon.",
+    studio_link1: "Open the platform →",
+    rs1_name: "Simulation Engine", rs2_name: "Virtual Sensors", rs3_name: "Code Editor",
+    rs4_name: "Python Runtime", rs5_name: "3D Arena", rs6_name: "Guided Missions",
+    rs7_name: "Hardware Bridge", rs8_name: "Project Saving", rs9_name: "Rival Bots", rs10_name: "Bilingual UI",
     proj_label: "Projects", proj_title: "What else I've built",
-    proj_desc: "Beyond Eteria, I've shipped a full-stack web app, built a competitive sumobot, and launched a 3D printing business.",
+    proj_desc: "Beyond Eteria and the Robotics Studio, I've built a full-stack marketplace, a competitive sumobot, and launched a 3D printing business.",
     proj1_cat: "Software Engineering · Full-stack",
-    proj1_desc: "A full-stack marketplace for trading collectibles. Built end-to-end: React + TypeScript frontend, C# ASP.NET backend, and MySQL database. Product-quality architecture, real deployment.",
+    proj1_status: "Offline",
+    proj1_desc: "A full-stack marketplace for trading collectibles: React + TypeScript frontend, C# ASP.NET backend and MySQL database.",
+    proj1_note: "This platform is no longer online: the free backend hosting it ran on ran out, so the deployment is down.",
     proj2_cat: "Entrepreneurship · 3D Printing",
     proj2_desc: "A personal 3D printing business where I handle design, manufacturing, and sales. Includes experimentation with TPU materials, functional geometry, and physical prototyping pipelines.",
     proj3_cat: "Robotics · Hardware",
@@ -597,10 +675,11 @@ const translations = {
     contact_label: "Contact", contact_title: "Let's talk",
     contact_p1: "I'm open to conversations about <strong>university opportunities</strong>, <strong>internships</strong>, <strong>game development projects</strong>, and <strong>collaborations</strong>. If you're a recruiter, admissions officer, or fellow builder — reach out.",
     contact_p2: "I'm based in <strong>Costa Rica</strong> and available remotely. My spoken languages are Spanish (native) and English (professional).",
-    cl_email: "Email", cl_eteria: "Eteria — project website", cl_figutrades: "FiguTrades — live app"
+    cl_email: "Email", cl_eteria: "Eteria — project website", cl_studio: "Eteria Robotics Studio — live platform"
   },
   es: {
     nav_about: "Sobre mí", nav_achievement: "Trayectoria", nav_eteria: "Eteria",
+    nav_studio: "Robotics Studio",
     nav_projects: "Proyectos", nav_skills: "Habilidades", nav_contact: "Contacto",
     hero_badge: "🥇 Medalla de Oro — Infomatrix Iberoamérica 2026",
     hero_h1: `Construyendo juegos,<br/>software <span class="dim">&</span> ideas<br/><span class="accent">desde cero.</span>`,
@@ -629,11 +708,12 @@ const translations = {
     about_p1: "Soy un desarrollador de 18 años de Costa Rica con pasión por construir <strong>proyectos complejos y ambiciosos</strong> desde cero. Llevo años programando, diseñando e iterando antes de tener cualquier educación formal en ello.",
     about_p2: "Mi enfoque principal es el <strong>desarrollo de videojuegos y la ingeniería de software</strong>, pero también trabajo con modelado 3D, shaders, VFX, robótica y hardware. Soy el tipo de persona que, cuando enfrenta un problema que no sabe resolver, simplemente aprende cómo hacerlo.",
     about_p3: "He pasado los últimos dos años construyendo Eteria — un RPG de mundo abierto con NPCs con IA, shaders personalizados, un sistema de combate completo y un mundo 3D hecho a mano. No para un proyecto escolar. Porque quiero que exista.",
+    about_p_studio: "Ese instinto se trasladó a la robótica: construí <strong>Eteria Robotics Studio</strong>, una plataforma web donde cualquiera puede programar un sumobot en Python o JavaScript, verlo combatir en un simulador 3D y luego enviar ese mismo código a una placa real. Es el proyecto con el que enseño lo que he aprendido.",
     about_p4: "Próximo paso: universidad en el extranjero. Busco entornos donde los builders ambiciosos puedan crecer rápido, trabajar en problemas difíciles y crear cosas reales.",
     pillar1_name: "Desarrollo de Videojuegos", pillar1_desc: "Unity, C#, sistemas de gameplay, IA, combate, shaders, VFX, optimización",
     pillar2_name: "Ingeniería de Software", pillar2_desc: "Desarrollo full-stack con React, TypeScript, ASP.NET y MySQL",
     pillar3_name: "Arte 3D & Técnico", pillar3_desc: "Modelado en Blender, UV unwrapping, rigging, shader graphs, texturas en Krita",
-    pillar4_name: "Robótica & Hardware", pillar4_desc: "ESP32, servomotores, sensores ultrasónicos, C++, lógica de control",
+    pillar4_name: "Robótica & Hardware", pillar4_desc: "ESP32, IdeaBoard, servomotores, sensores ultrasónicos, C++, CircuitPython, simulación de robots",
     pillar5_name: "Impresión 3D & Prototipado", pillar5_desc: "Prototipado físico, materiales TPU, geometría funcional, fabricación personalizada",
     flag_badge: "⭐ Proyecto principal",
     flag_desc1: "Un RPG de mundo abierto desarrollado en solitario en Unity durante más de dos años. Eteria presenta cinco islas con biomas distintos, un sistema completo de dragones con captura, doma y vuelo montable, combate elemental por turnos, NPCs con IA dinámica, assets 3D hechos a mano y un sistema de UI completo — todo funcionando establemente en hardware de gama baja.",
@@ -642,10 +722,24 @@ const translations = {
     sys1_name: "Sistema de Dragones", sys2_name: "Motor de Combate", sys3_name: "IA de NPCs",
     sys4_name: "Shaders Personalizados", sys5_name: "Sistemas VFX", sys6_name: "UI Dinámica",
     sys7_name: "Optimización", sys8_name: "Cinemáticas", sys9_name: "Mundo Abierto", sys10_name: "Sistemas de Datos",
+    studio_badge: "🤖 Plataforma de robótica · En línea",
+    studio_alt: "// programa, entrena y combate sumobots virtuales",
+    studio_desc1: "Una plataforma web para aprender robótica construyéndola. Escribes la lógica de un sumobot en JavaScript o Python dentro de un editor de código real, le das a ejecutar y ves el combate desarrollarse en una arena 3D — siguiendo las reglas oficiales de la competencia de mini sumo de CENFOTEC. Sin instalaciones, sin configuración y sin necesidad de hardware para empezar.",
+    studio_desc2: "Por debajo corre un motor de física determinista propio con detección de colisiones OBB y sensores IR, sonar y de contacto simulados, así que cada combate es reproducible a partir de una semilla. Python se ejecuta con Pyodide en un Web Worker con shims de CircuitPython, el render lo hace Three.js, y un service worker habilita el aislamiento de origen cruzado que el runtime necesita en GitHub Pages.",
+    studio_desc3: "También es un curso completo. Siete mundos progresivos llevan al estudiante desde el primer movimiento hasta la lectura de sensores, máquinas de estado, maniobras en curva, estrategia de combate, optimización de parámetros y un torneo final — con pistas graduales, cono de sonar visible, XP y niveles. Y cuando el robot virtual funciona, un puente por Web Serial envía el mismo código a una IdeaBoard real mediante el raw REPL de MicroPython: de la simulación al hardware sin salir de la pestaña.",
+    studio_li1: "<strong>SumoLab</strong> — el laboratorio completo: editor de código, simulación 3D y control total.",
+    studio_li2: "<strong>Aprende</strong> — misiones guiadas paso a paso. De cero a robot competitivo.",
+    studio_li3: "<strong>Batalla</strong> — torneos, rivales y ranking. Próximamente.",
+    studio_link1: "Abrir la plataforma →",
+    rs1_name: "Motor de Simulación", rs2_name: "Sensores Virtuales", rs3_name: "Editor de Código",
+    rs4_name: "Runtime de Python", rs5_name: "Arena 3D", rs6_name: "Misiones Guiadas",
+    rs7_name: "Puente con Hardware", rs8_name: "Guardado de Proyectos", rs9_name: "Bots Rivales", rs10_name: "UI Bilingüe",
     proj_label: "Proyectos", proj_title: "Qué más he construido",
-    proj_desc: "Más allá de Eteria, he lanzado una aplicación web full-stack, construido un sumobot competitivo y creado un negocio de impresión 3D.",
+    proj_desc: "Más allá de Eteria y el Robotics Studio, he construido un marketplace full-stack, un sumobot competitivo y un negocio de impresión 3D.",
     proj1_cat: "Ingeniería de Software · Full-stack",
-    proj1_desc: "Un marketplace full-stack para intercambiar coleccionables. Construido de principio a fin: frontend con React + TypeScript, backend en C# ASP.NET y base de datos MySQL. Arquitectura de calidad de producto, deployment real.",
+    proj1_status: "Fuera de línea",
+    proj1_desc: "Un marketplace full-stack para intercambiar coleccionables: frontend con React + TypeScript, backend en C# ASP.NET y base de datos MySQL.",
+    proj1_note: "Esta plataforma ya no está en línea: se agotó el backend gratuito en el que corría, así que el despliegue está caído.",
     proj2_cat: "Emprendimiento · Impresión 3D",
     proj2_desc: "Un negocio personal de impresión 3D donde me encargo del diseño, fabricación y ventas. Incluye experimentación con materiales TPU, geometría funcional y pipelines de prototipado físico.",
     proj3_cat: "Robótica · Hardware",
@@ -664,7 +758,7 @@ const translations = {
     contact_label: "Contacto", contact_title: "Hablemos",
     contact_p1: "Estoy abierto a conversaciones sobre <strong>oportunidades universitarias</strong>, <strong>pasantías</strong>, <strong>proyectos de desarrollo de videojuegos</strong> y <strong>colaboraciones</strong>. Si eres reclutador, oficial de admisiones o un fellow builder — escríbeme.",
     contact_p2: "Estoy en <strong>Costa Rica</strong> y disponible de forma remota. Mis idiomas son español (nativo) e inglés (profesional).",
-    cl_email: "Correo", cl_eteria: "Eteria — sitio del proyecto", cl_figutrades: "FiguTrades — app en vivo"
+    cl_email: "Correo", cl_eteria: "Eteria — sitio del proyecto", cl_studio: "Eteria Robotics Studio — plataforma en vivo"
   }
 };
 
