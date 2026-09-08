@@ -129,6 +129,8 @@
     .project-icon.purple { background: rgba(108,99,255,0.12); }
     .project-icon.teal { background: rgba(62,207,142,0.12); }
     .project-icon.amber { background: rgba(212,160,23,0.12); }
+    .project-icon.rose { background: rgba(236,72,153,0.12); }
+    .project-icon.cyan { background: rgba(34,211,238,0.12); }
     .project-arrow { color: var(--text-dim); font-size: 1rem; transition: transform 0.2s, color 0.2s; }
     .project-card:hover .project-arrow { transform: translate(2px, -2px); color: var(--text-muted); }
     .project-category { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
@@ -350,6 +352,11 @@
           <div class="pillar-name" data-i18n="pillar5_name">3D Printing & Prototyping</div>
           <div class="pillar-desc" data-i18n="pillar5_desc">Physical prototyping, TPU materials, functional geometry, custom manufacturing</div>
         </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🥽</div>
+          <div class="pillar-name" data-i18n="pillar6_name">VR / AR Development</div>
+          <div class="pillar-desc" data-i18n="pillar6_desc">Unity XR, OpenXR, ARKit, spatial tracking, accessible hardware design</div>
+        </div>
       </div>
     </div>
   </div>
@@ -439,7 +446,7 @@
   <div class="container">
     <div class="section-label" data-i18n="proj_label">Projects</div>
     <div class="section-title" data-i18n="proj_title">What else I've built</div>
-    <p class="section-desc" data-i18n="proj_desc">Beyond Eteria and the Robotics Studio, I've built a full-stack marketplace, a competitive sumobot, and launched a 3D printing business.</p>
+    <p class="section-desc" data-i18n="proj_desc">Beyond Eteria and the Robotics Studio, I've built a full-stack marketplace, a competitive sumobot, and launched a 3D printing business — and I'm now developing two VR projects: a Meta Quest party game and a low-cost smartphone VR headset.</p>
     <div class="projects-grid">
       <div class="project-card" style="cursor: default;">
         <div class="project-header"><div class="project-icon teal">🛒</div><span class="status-pill" data-i18n="proj1_status">Offline</span></div>
@@ -469,6 +476,20 @@
         <div class="project-name" data-i18n="proj4_name">Programming Club — CTP Mario Quirós</div>
         <p class="project-desc" data-i18n="proj4_desc">After winning at Infomatrix, I founded a school programming club to share what I had learned. Over 15 students are now building their own projects in software, games, and hardware.</p>
         <div class="project-tags"><span class="tag">Unity</span><span class="tag">Python</span><span class="tag">C#</span><span class="tag">Mentoring</span></div>
+      </div>
+      <div class="project-card" style="cursor: default;">
+        <div class="project-header"><div class="project-icon rose">🕹️</div><span class="status-pill" data-i18n="proj5_status">In Development</span></div>
+        <div class="project-category" data-i18n="proj5_cat">Game Development · VR (Meta Quest 3)</div>
+        <div class="project-name" data-i18n="proj5_name">What's Next — VR Party Game</div>
+        <p class="project-desc" data-i18n="proj5_desc">A Wii-Sports-style VR party game for Meta Quest 3: short minigames — mini golf, archery, ping pong, tennis, volleyball, chess, foosball — rotate at random for rooms of up to six players, set in real Costa Rican locations with a Gold/Jade coin economy. Built in Unity 6 with OpenXR and the XR Interaction Toolkit, with input configurable between physical controllers and hand tracking.</p>
+        <div class="project-tags"><span class="tag">Unity 6</span><span class="tag">OpenXR</span><span class="tag">XR Interaction Toolkit</span><span class="tag">Meta Quest 3</span><span class="tag">C#</span></div>
+      </div>
+      <div class="project-card" style="cursor: default;">
+        <div class="project-header"><div class="project-icon cyan">🥽</div><span class="status-pill" data-i18n="proj6_status">In Development</span></div>
+        <div class="project-category" data-i18n="proj6_cat">R&D · Accessible VR</div>
+        <div class="project-name" data-i18n="proj6_name">Eteria VR 1 — Smartphone VR Headset</div>
+        <p class="project-desc" data-i18n="proj6_desc">A low-cost alternative to buying a Meta Quest: turning an iPhone into a 6DoF VR headset. A 3D-printed enclosure with stereoscopic lenses pairs with the phone's camera and IMU for inside-out tracking (VIO/SLAM) and an external ESP32-based controller, targeting one-hour sessions of motion-safe minigames — archery, ping pong, mini golf — that share a catalog with What's Next.</p>
+        <div class="project-tags"><span class="tag">iPhone / ARKit</span><span class="tag">3D Printing</span><span class="tag">Computer Vision</span><span class="tag">Sensor Fusion</span><span class="tag">ESP32</span></div>
       </div>
     </div>
   </div>
@@ -632,6 +653,7 @@ const translations = {
     pillar3_name: "3D & Technical Art", pillar3_desc: "Blender modeling, UV unwrapping, rigging, shader graphs, Krita textures",
     pillar4_name: "Robotics & Hardware", pillar4_desc: "ESP32, IdeaBoard, servo motors, ultrasonic sensors, C++, CircuitPython, robot simulation",
     pillar5_name: "3D Printing & Prototyping", pillar5_desc: "Physical prototyping, TPU materials, functional geometry, custom manufacturing",
+    pillar6_name: "VR / AR Development", pillar6_desc: "Unity XR, OpenXR, ARKit, spatial tracking, accessible hardware design",
     flag_badge: "⭐ Flagship project",
     flag_desc1: "An open-world RPG developed solo in Unity over two-plus years. Eteria features five islands with distinct biomes, a full dragon system with capture, taming, and rideable flight, turn-based elemental combat, AI-driven NPCs, handcrafted 3D assets, and a complete UI system — all running stably on low-end hardware.",
     flag_desc2: "This project is the clearest demonstration of what I can do: sustain a large, multi-system codebase over time, learn new technologies as needed, and deliver something polished. The same project that won Gold at both national and Iberoamerican Infomatrix.",
@@ -652,7 +674,7 @@ const translations = {
     rs4_name: "Python Runtime", rs5_name: "3D Arena", rs6_name: "Guided Missions",
     rs7_name: "Hardware Bridge", rs8_name: "Project Saving", rs9_name: "Rival Bots", rs10_name: "Bilingual UI",
     proj_label: "Projects", proj_title: "What else I've built",
-    proj_desc: "Beyond Eteria and the Robotics Studio, I've built a full-stack marketplace, a competitive sumobot, and launched a 3D printing business.",
+    proj_desc: "Beyond Eteria and the Robotics Studio, I've built a full-stack marketplace, a competitive sumobot, and launched a 3D printing business — and I'm now developing two VR projects: a Meta Quest party game and a low-cost smartphone VR headset.",
     proj1_cat: "Software Engineering · Full-stack",
     proj1_status: "Offline",
     proj1_desc: "A full-stack marketplace for trading collectibles: React + TypeScript frontend, C# ASP.NET backend and MySQL database.",
@@ -665,6 +687,14 @@ const translations = {
     proj4_cat: "Community · Education",
     proj4_name: "Programming Club — CTP Mario Quirós",
     proj4_desc: "After winning at Infomatrix, I founded a school programming club to share what I had learned. Over 15 students are now building their own projects in software, games, and hardware.",
+    proj5_status: "In Development",
+    proj5_cat: "Game Development · VR (Meta Quest 3)",
+    proj5_name: "What's Next — VR Party Game",
+    proj5_desc: "A Wii-Sports-style VR party game for Meta Quest 3: short minigames — mini golf, archery, ping pong, tennis, volleyball, chess, foosball — rotate at random for rooms of up to six players, set in real Costa Rican locations with a Gold/Jade coin economy. Built in Unity 6 with OpenXR and the XR Interaction Toolkit, with input configurable between physical controllers and hand tracking.",
+    proj6_status: "In Development",
+    proj6_cat: "R&D · Accessible VR",
+    proj6_name: "Eteria VR 1 — Smartphone VR Headset",
+    proj6_desc: "A low-cost alternative to buying a Meta Quest: turning an iPhone into a 6DoF VR headset. A 3D-printed enclosure with stereoscopic lenses pairs with the phone's camera and IMU for inside-out tracking (VIO/SLAM) and an external ESP32-based controller, targeting one-hour sessions of motion-safe minigames — archery, ping pong, mini golf — that share a catalog with What's Next.",
     skills_label: "Tech Stack", skills_title: "Skills & tools",
     sg1: "Languages", sg2: "Game Development", sg3: "Web & Software", sg4: "3D & Art",
     goals_label: "Vision", goals_title: "Where I'm headed", goals_desc: "I'm not done building. This is just the beginning.",
@@ -715,6 +745,7 @@ const translations = {
     pillar3_name: "Arte 3D & Técnico", pillar3_desc: "Modelado en Blender, UV unwrapping, rigging, shader graphs, texturas en Krita",
     pillar4_name: "Robótica & Hardware", pillar4_desc: "ESP32, IdeaBoard, servomotores, sensores ultrasónicos, C++, CircuitPython, simulación de robots",
     pillar5_name: "Impresión 3D & Prototipado", pillar5_desc: "Prototipado físico, materiales TPU, geometría funcional, fabricación personalizada",
+    pillar6_name: "Desarrollo VR / AR", pillar6_desc: "Unity XR, OpenXR, ARKit, tracking espacial, diseño de hardware accesible",
     flag_badge: "⭐ Proyecto principal",
     flag_desc1: "Un RPG de mundo abierto desarrollado en solitario en Unity durante más de dos años. Eteria presenta cinco islas con biomas distintos, un sistema completo de dragones con captura, doma y vuelo montable, combate elemental por turnos, NPCs con IA dinámica, assets 3D hechos a mano y un sistema de UI completo — todo funcionando establemente en hardware de gama baja.",
     flag_desc2: "Este proyecto es la demostración más clara de lo que soy capaz: mantener una base de código grande y multi-sistema durante mucho tiempo, aprender nuevas tecnologías según se necesiten y entregar algo pulido. El mismo proyecto que ganó el Oro en Infomatrix tanto nacional como iberoamericano.",
@@ -735,7 +766,7 @@ const translations = {
     rs4_name: "Runtime de Python", rs5_name: "Arena 3D", rs6_name: "Misiones Guiadas",
     rs7_name: "Puente con Hardware", rs8_name: "Guardado de Proyectos", rs9_name: "Bots Rivales", rs10_name: "UI Bilingüe",
     proj_label: "Proyectos", proj_title: "Qué más he construido",
-    proj_desc: "Más allá de Eteria y el Robotics Studio, he construido un marketplace full-stack, un sumobot competitivo y un negocio de impresión 3D.",
+    proj_desc: "Más allá de Eteria y el Robotics Studio, he construido un marketplace full-stack, un sumobot competitivo y un negocio de impresión 3D — y ahora estoy desarrollando dos proyectos VR: un juego de fiesta para Meta Quest y un visor VR de bajo costo con celular.",
     proj1_cat: "Ingeniería de Software · Full-stack",
     proj1_status: "Fuera de línea",
     proj1_desc: "Un marketplace full-stack para intercambiar coleccionables: frontend con React + TypeScript, backend en C# ASP.NET y base de datos MySQL.",
@@ -748,6 +779,14 @@ const translations = {
     proj4_cat: "Comunidad · Educación",
     proj4_name: "Club de Programación — CTP Mario Quirós",
     proj4_desc: "Tras ganar en Infomatrix, fundé un club de programación en el colegio para compartir lo aprendido. Más de 15 estudiantes ya están construyendo sus propios proyectos en software, videojuegos y hardware.",
+    proj5_status: "En desarrollo",
+    proj5_cat: "Desarrollo de Videojuegos · VR (Meta Quest 3)",
+    proj5_name: "What's Next — Juego de Fiesta VR",
+    proj5_desc: "Un juego de fiesta VR estilo Wii Sports para Meta Quest 3: minijuegos cortos —minigolf, arquería, ping pong, tenis, volleyball, ajedrez, futbolín— rotan al azar en salas de hasta seis jugadores, ambientado en lugares reales de Costa Rica con una economía de monedas Oro/Jade. Construido en Unity 6 con OpenXR y el XR Interaction Toolkit, con input configurable entre control físico y hand tracking.",
+    proj6_status: "En desarrollo",
+    proj6_cat: "I+D · VR Accesible",
+    proj6_name: "Eteria VR 1 — Visor VR con Celular",
+    proj6_desc: "Una alternativa de bajo costo a comprar un Meta Quest: convertir un iPhone en un visor VR de 6DoF. Una carcasa impresa en 3D con lentes estereoscópicas se combina con la cámara y el IMU del teléfono para tracking inside-out (VIO/SLAM) y un controlador externo basado en ESP32, apuntando a sesiones de una hora con minijuegos sin mareo —arquería, ping pong, minigolf— que comparten catálogo con What's Next.",
     skills_label: "Stack Tecnológico", skills_title: "Habilidades y herramientas",
     sg1: "Lenguajes", sg2: "Desarrollo de Juegos", sg3: "Web & Software", sg4: "Arte 3D",
     goals_label: "Visión", goals_title: "Hacia dónde voy", goals_desc: "No he terminado de construir. Esto es solo el comienzo.",
